@@ -19,11 +19,13 @@ const CartItem = ({ onContinueShopping }) => {
     return total.toFixed(2);
   };
 
+  // Continue shopping
   const handleContinueShopping = (e) => {
     e.preventDefault();
     onContinueShopping(e);
   };
 
+  // Increase item quantity
   const handleIncrement = (item) => {
     dispatch(
       updateQuantity({
@@ -33,6 +35,7 @@ const CartItem = ({ onContinueShopping }) => {
     );
   };
 
+  // Decrease item quantity
   const handleDecrement = (item) => {
     if (item.quantity > 1) {
       dispatch(
@@ -46,14 +49,20 @@ const CartItem = ({ onContinueShopping }) => {
     }
   };
 
+  // Remove item completely
   const handleRemove = (item) => {
     dispatch(removeItem(item.name));
   };
 
-  // Calculate total cost based on quantity for an item
+  // Calculate total cost for one item
   const calculateTotalCost = (item) => {
     const price = parseFloat(item.cost.substring(1));
     return (price * item.quantity).toFixed(2);
+  };
+
+  // Checkout
+  const handleCheckoutShopping = () => {
+    alert('Functionality to be added for future reference');
   };
 
   return (
@@ -72,7 +81,9 @@ const CartItem = ({ onContinueShopping }) => {
             />
 
             <div className="cart-item-details">
-              <div className="cart-item-name">{item.name}</div>
+              <div className="cart-item-name">
+                {item.name}
+              </div>
 
               <div className="cart-item-cost">
                 {item.cost}
@@ -121,7 +132,7 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button
           className="get-started-button"
-          onClick={(e) => handleContinueShopping(e)}
+          onClick={handleContinueShopping}
         >
           Continue Shopping
         </button>
@@ -130,9 +141,7 @@ const CartItem = ({ onContinueShopping }) => {
 
         <button
           className="get-started-button1"
-          onClick={() =>
-            alert('Functionality to be added for future reference')
-          }
+          onClick={handleCheckoutShopping}
         >
           Checkout
         </button>
